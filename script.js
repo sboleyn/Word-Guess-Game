@@ -202,22 +202,48 @@ function chooseRandomWord(wBank){
 	var displayHiddenWord = oneHiddenLetter.repeat(randomWord.length);
 	var dhwNoEndSpace = displayHiddenWord.substr(0,displayHiddenWord.length-1);
 	var getWordSpace = document.getElementById("currentWord");
-	getWordSpace.textContent = dhwNoEndSpace
-	return wBank[rando];
+	getWordSpace.textContent = dhwNoEndSpace;
+// 	Testing purposes	
+//	return wBank[rando];
 	}
+
+function game(){
+	
+	//Create an empty array for the letters already guessed
+	var lettersAlreadyGuessed = [];
+	//Guesses go down 1 as the user presses a key not in the phrase; does not go does or up if the guess has already been guessed befored, and stays the same if the guess is a good guess
+	
+	//Set guesses to 12 at start of game
+	var guessesRemaining = 12; 
+	
+	document.onkeyup = function(event) {
+		lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
+		var letterGuessedList = document.getElementById("lettersGuessed");
+		if (lettersAlreadyGuessed.includes(event.key)){
+			return ; 
+		}
+		else if (lettersAlreadyGuessed.indexOf(event.key) === -1){
+			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
+//			guessesRemaining--; 
+			var guessesSpace = document.getelementbyId("guessesRemaining");
+			guessesSpace.textContent = guessesRemaining;	
+		}
+	};
+}
+
+	// Reference
 	//var res = str1.concat(str2);
 
 
 
 function setup(){
+	chooseRandomWord(wordBank);
 //Testing purposes	
 //	console.log(chooseRandomWord(wordBank));
 }
-//function game(){
-//	
-//}
 
 window.addEventListener('load', function() {
   // Call the setup function
-  setup();
+ 	setup();
+ 	game();
 });
