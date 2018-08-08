@@ -208,33 +208,39 @@ function chooseRandomWord(wBank){
 	}
 
 function game(){
-	
+	// Create reference to lettersGuessed and guessesRemaining
+	var letterGuessedList = document.getElementById("lettersGuessed");
+	var guessesSpace = document.getElementById("guessesRemaining");
+
+	var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 	//Create an empty array for the letters already guessed
 	var lettersAlreadyGuessed = [];
-	//Guesses go down 1 as the user presses a key not in the phrase; does not go does or up if the guess has already been guessed befored, and stays the same if the guess is a good guess
 	
-	//Set guesses to 12 at start of game
+	//Set guesses to 12 at start of game, wins to 0
 	var guessesRemaining = 12; 
+	var wins=0;
 	
 	document.onkeyup = function(event) {
-		lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
-		var letterGuessedList = document.getElementById("lettersGuessed");
-		if (lettersAlreadyGuessed.includes(event.key)){
-			return ; 
+		//Runs when the gamer selects a valid key that has already been guessed; nothing happens	
+		if (alphabet.includes(event.key.toLowerCase()) && lettersAlreadyGuessed.includes(event.key.toLowerCase())){
+			console.log("already been guessed");
 		}
-		else if (lettersAlreadyGuessed.indexOf(event.key) === -1){
+
+		//Runs if the gamer selects a valid key that has not been guessed
+		else if (alphabet.includes(event.key.toLowerCase()) && lettersAlreadyGuessed.indexOf(event.key) === -1){
+			lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
+			
 			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
-//			guessesRemaining--; 
-			var guessesSpace = document.getelementbyId("guessesRemaining");
-			guessesSpace.textContent = guessesRemaining;	
+		}
+
+		else {
+			
 		}
 	};
-}
+};
 
 	// Reference
 	//var res = str1.concat(str2);
-
-
 
 function setup(){
 	chooseRandomWord(wordBank);
@@ -242,8 +248,10 @@ function setup(){
 //	console.log(chooseRandomWord(wordBank));
 }
 
+
+// Calls to action
 window.addEventListener('load', function() {
   // Call the setup function
- 	setup();
- 	game();
 });
+
+game();
