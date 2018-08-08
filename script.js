@@ -198,9 +198,16 @@ function chooseRandomWord(wBank){
 	//Generates a random variable
 	var rando = Math.floor((Math.random() * wordBank.length));	
 	var randomWord = wBank[rando];
-	var displayHiddenWord = 
-//	return wBank[rando];
-}
+	var oneHiddenLetter = "_ ";
+	var displayHiddenWord = oneHiddenLetter.repeat(randomWord.length);
+	var dhwNoEndSpace = displayHiddenWord.substr(0,displayHiddenWord.length-1);
+	var getWordSpace = document.getElementById("currentWord");
+	getWordSpace.textContent = dhwNoEndSpace
+	return wBank[rando];
+	}
+	//var res = str1.concat(str2);
+
+
 
 function setup(){
 //Testing purposes	
