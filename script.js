@@ -186,3 +186,15 @@ var wordBank = [
 "wraith",
 "zombie"
 ];
+
+function chooseRandomWord(wBank){
+	var rando = Math.floor((Math.random() * wordBank.length));	
+	return wBank[rando];
+}
+//function game(){
+//	
+//}
+	
+chooseRandomWord(wordBank);
+	
+	
