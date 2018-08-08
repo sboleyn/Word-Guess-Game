@@ -1,4 +1,9 @@
 // JavaScript Document
+// Hold a global reference to the div#main element.
+"use strict";
+
+var main = document.getElementById("main");
+
 var wordBank = [
 "afraid",
 "afterlife",
@@ -187,14 +192,25 @@ var wordBank = [
 "zombie"
 ];
 
+// This function should choose a random word at the beginning of the game and that word should be displayed ex._____ on the page.
+
 function chooseRandomWord(wBank){
+	//Generates a random variable
 	var rando = Math.floor((Math.random() * wordBank.length));	
-	return wBank[rando];
+	var randomWord = wBank[rando];
+	var displayHiddenWord = 
+//	return wBank[rando];
+}
+
+function setup(){
+//Testing purposes	
+//	console.log(chooseRandomWord(wordBank));
 }
 //function game(){
 //	
 //}
-	
-chooseRandomWord(wordBank);
-	
-	
+
+window.addEventListener('load', function() {
+  // Call the setup function
+  setup();
+});
