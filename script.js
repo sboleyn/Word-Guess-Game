@@ -234,7 +234,8 @@ function game(){
 		}
 
 		else {
-			
+			--guessesRemaining; 
+			guessesSpace.textContent = guessesRemaining;	
 		}
 	};
 };
