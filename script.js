@@ -1,6 +1,6 @@
 // JavaScript Document
 // Hold a global reference to the div#main element.
-"use strict";
+// "use strict";
 
 var main = document.getElementById("main");
 
@@ -201,14 +201,16 @@ function chooseRandomWord(wBank){
 	//Generates a random variable
 	var rando = Math.floor((Math.random() * wordBank.length));	
 	var randomWord = wBank[rando];
-	var oneHiddenLetter = "_ ";
-	var displayHiddenWord = oneHiddenLetter.repeat(randomWord.length);
+	var oneHiddenLetter = "_";
+	var displayHiddenWord = oneHiddenLetter.repeat(randomWord.length+1);
 	var dhwNoEndSpace = displayHiddenWord.substr(0,displayHiddenWord.length-1);
 	getWordSpace.textContent = dhwNoEndSpace;
-	return randomWord;
-// 	Testing purposes	
-//	return wBank[rando];
-	};
+	return [randomWord, rando, dhwNoEndSpace];
+	}
+// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+var outputArray= chooseRandomWord(wordBank);
+var chosenRandomWord= outputArray[0];
+var wordBlankArray= outputArray[2].split("");
 
 function game(rWord){
 	// Create reference to lettersGuessed and guessesRemaining
@@ -224,31 +226,47 @@ function game(rWord){
 	var guessesRemaining = 12; 
 	var wins=0;
 	
+	// Example of wordArray is ["e", "y", "e", "b", "a", "l", "l", "s"]
 	var wordArray = chosenRandomWord.toLowerCase().split("");
 
 	document.onkeyup = function(event) {
 		//Runs when the gamer selects a valid key that has already been guessed; nothing happens	
-		if (alphabet.includes(event.key.toLowerCase()) && lettersAlreadyGuessed.includes(event.key.toLowerCase())){
+		var lowKey = event.key.toLowerCase(); 
+		if (alphabet.includes(lowKey) && lettersAlreadyGuessed.includes(lowKey)){
 			console.log("already been guessed");
 		}
 
-		//Runs if the gamer selects a valid key that has not been guessed
-		else if (alphabet.includes(event.key.toLowerCase()) && wordArray.includes(event.key.toLowerCase()) && lettersAlreadyGuessed.indexOf(event.key) === -1){
-			lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
-			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
-			for (var i=0; i<rWord.length<i++){
-				if rWord[i].toLowerCase() === event.key{
-					
-				}
+		//Runs if the gamer selects a valid key which is in the word that has not been guessed
+		else if (alphabet.includes(lowKey) && wordArray.includes(lowKey) && lettersAlreadyGuessed.indexOf(event.key) === -1){
+			// lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
+			// //displays a list like A, B, C of guessed letters not in the word
+			// letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
+
+			for (i=0; i<rWord.length;i++){
+				if (rWord[i].toLowerCase() === lowKey){
+					wordBlankArray[i] = event.key.toUpperCase();
+					getWordSpace.textContent = wordBlankArray.join("");
+				};
 			}
-			getWordSpace.textContent = dhwNoEndSpace
+		//Ends the else if	
+		}
+		//Runs if the gamer selects a valid key which is not in the word 
+		else if (alphabet.includes(lowKey) && guessesRemaining > 0) {
+			--guessesRemaining; 
+			guessesSpace.textContent = guessesRemaining;	
+			lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
+			//displays a list like A, B, C of guessed letters not in the word
+			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
+					//Runs if the gamer selects a valid key and the game is over
+		if (guessesRemaining === 0){
+			console.log("test");
+		}
 		}
 
-		// else if (guessesRemaining > 0) {
-		// 	--guessesRemaining; 
-		// 	guessesSpace.textContent = guessesRemaining;	
-		// }
-	};
+
+	//Ends the document onkey up function of game	
+	}
+//Ends game function	
 };
 
 	// Reference
@@ -266,5 +284,5 @@ function game(rWord){
 //   // Call the setup function
 //   var chosenRandomWord = setup();
 // });
-var chosenRandomWord = chooseRandomWord(wordBank);
+// var chosenRandomWord= chooseRandomWord(wordBank)[0];
 game(chosenRandomWord);
