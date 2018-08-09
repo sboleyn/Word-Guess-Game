@@ -209,10 +209,11 @@ function chooseRandomWord(wBank){
 	}
 // Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
 var outputArray= chooseRandomWord(wordBank);
+
 var chosenRandomWord= outputArray[0];
 var wordBlankArray= outputArray[2].split("");
 
-function game(rWord){
+// function game(rWord){
 	// Create reference to lettersGuessed and guessesRemaining
 	// var letterGuessedList = document.getElementById("lettersGuessed");
 	// var guessesSpace = document.getElementById("guessesRemaining");
@@ -242,8 +243,8 @@ function game(rWord){
 			// //displays a list like A, B, C of guessed letters not in the word
 			// letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
 
-			for (i=0; i<rWord.length;i++){
-				if (rWord[i].toLowerCase() === lowKey){
+			for (i=0; i<chosenRandomWord.length;i++){
+				if (chosenRandomWord[i].toLowerCase() === lowKey){
 					wordBlankArray[i] = event.key.toUpperCase();
 					getWordSpace.textContent = wordBlankArray.join("");
 				};
@@ -256,18 +257,27 @@ function game(rWord){
 			guessesSpace.textContent = guessesRemaining;	
 			lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
 			//displays a list like A, B, C of guessed letters not in the word
-			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
+			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");}
 					//Runs if the gamer selects a valid key and the game is over
 		if (guessesRemaining === 0){
-			console.log("test");
-		}
-		}
+		// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+		outputArray= chooseRandomWord(wordBank);
+		chosenRandomWord= outputArray[0];
+		wordBlankArray= outputArray[2].split("");
+		lettersAlreadyGuessed = [];
+		letterGuessedList.textContent = "";
+		guessesRemaining = 12; 
+		guessesSpace.textcontent = guessesRemaining;
+		wordArray = chosenRandomWord.toLowerCase().split("");
+	};
+
+
 
 
 	//Ends the document onkey up function of game	
 	}
 //Ends game function	
-};
+// };
 
 	// Reference
 	//var res = str1.concat(str2);
@@ -285,4 +295,4 @@ function game(rWord){
 //   var chosenRandomWord = setup();
 // });
 // var chosenRandomWord= chooseRandomWord(wordBank)[0];
-game(chosenRandomWord);
+// game(chosenRandomWord);
