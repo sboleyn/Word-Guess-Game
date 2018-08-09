@@ -192,6 +192,9 @@ var wordBank = [
 "zombie"
 ];
 
+var letterGuessedList = document.getElementById("lettersGuessed");
+var guessesSpace = document.getElementById("guessesRemaining");
+var getWordSpace = document.getElementById("currentWord");
 // This function should choose a random word at the beginning of the game and that word should be displayed ex._____ on the page.
 
 function chooseRandomWord(wBank){
@@ -201,16 +204,17 @@ function chooseRandomWord(wBank){
 	var oneHiddenLetter = "_ ";
 	var displayHiddenWord = oneHiddenLetter.repeat(randomWord.length);
 	var dhwNoEndSpace = displayHiddenWord.substr(0,displayHiddenWord.length-1);
-	var getWordSpace = document.getElementById("currentWord");
 	getWordSpace.textContent = dhwNoEndSpace;
+	return randomWord;
 // 	Testing purposes	
 //	return wBank[rando];
-	}
+	};
 
-function game(){
+function game(rWord){
 	// Create reference to lettersGuessed and guessesRemaining
-	var letterGuessedList = document.getElementById("lettersGuessed");
-	var guessesSpace = document.getElementById("guessesRemaining");
+	// var letterGuessedList = document.getElementById("lettersGuessed");
+	// var guessesSpace = document.getElementById("guessesRemaining");
+	// var wordSpace = document.getElementById("currentWord");
 
 	var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 	//Create an empty array for the letters already guessed
@@ -220,6 +224,8 @@ function game(){
 	var guessesRemaining = 12; 
 	var wins=0;
 	
+	var wordArray = chosenRandomWord.toLowerCase().split("");
+
 	document.onkeyup = function(event) {
 		//Runs when the gamer selects a valid key that has already been guessed; nothing happens	
 		if (alphabet.includes(event.key.toLowerCase()) && lettersAlreadyGuessed.includes(event.key.toLowerCase())){
@@ -227,32 +233,38 @@ function game(){
 		}
 
 		//Runs if the gamer selects a valid key that has not been guessed
-		else if (alphabet.includes(event.key.toLowerCase()) && lettersAlreadyGuessed.indexOf(event.key) === -1){
+		else if (alphabet.includes(event.key.toLowerCase()) && wordArray.includes(event.key.toLowerCase()) && lettersAlreadyGuessed.indexOf(event.key) === -1){
 			lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
-			
 			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
+			for (var i=0; i<rWord.length<i++){
+				if rWord[i].toLowerCase() === event.key{
+					
+				}
+			}
+			getWordSpace.textContent = dhwNoEndSpace
 		}
 
-		else {
-			--guessesRemaining; 
-			guessesSpace.textContent = guessesRemaining;	
-		}
+		// else if (guessesRemaining > 0) {
+		// 	--guessesRemaining; 
+		// 	guessesSpace.textContent = guessesRemaining;	
+		// }
 	};
 };
 
 	// Reference
 	//var res = str1.concat(str2);
 
-function setup(){
-	chooseRandomWord(wordBank);
+//function setup(){
+//	chooseRandomWord(wordBank);
 //Testing purposes	
 //	console.log(chooseRandomWord(wordBank));
-}
+//}
 
 
 // Calls to action
-window.addEventListener('load', function() {
-  // Call the setup function
-});
-
-game();
+// window.addEventListener('load', function() {
+//   // Call the setup function
+//   var chosenRandomWord = setup();
+// });
+var chosenRandomWord = chooseRandomWord(wordBank);
+game(chosenRandomWord);
