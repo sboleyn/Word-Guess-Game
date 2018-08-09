@@ -1,9 +1,4 @@
 // JavaScript Document
-// Hold a global reference to the div#main element.
-// "use strict";
-
-var main = document.getElementById("main");
-
 var wordBank = [
 "afraid",
 "afterlife",
@@ -195,6 +190,8 @@ var wordBank = [
 var letterGuessedList = document.getElementById("lettersGuessed");
 var guessesSpace = document.getElementById("guessesRemaining");
 var getWordSpace = document.getElementById("currentWord");
+var getWins = document.getElementById("displayWins");
+
 // This function should choose a random word at the beginning of the game and that word should be displayed ex._____ on the page.
 
 function chooseRandomWord(wBank){
@@ -207,92 +204,76 @@ function chooseRandomWord(wBank){
 	getWordSpace.textContent = dhwNoEndSpace;
 	return [randomWord, rando, dhwNoEndSpace];
 	}
+
 // Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
 var outputArray= chooseRandomWord(wordBank);
 
 var chosenRandomWord= outputArray[0];
 var wordBlankArray= outputArray[2].split("");
 
-// function game(rWord){
-	// Create reference to lettersGuessed and guessesRemaining
-	// var letterGuessedList = document.getElementById("lettersGuessed");
-	// var guessesSpace = document.getElementById("guessesRemaining");
-	// var wordSpace = document.getElementById("currentWord");
+var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+//Create an empty array for the letters already guessed
+var lettersAlreadyGuessed = [];
 
-	var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-	//Create an empty array for the letters already guessed
-	var lettersAlreadyGuessed = [];
-	
-	//Set guesses to 12 at start of game, wins to 0
-	var guessesRemaining = 12; 
-	var wins=0;
-	
-	// Example of wordArray is ["e", "y", "e", "b", "a", "l", "l", "s"]
-	var wordArray = chosenRandomWord.toLowerCase().split("");
+//Set guesses to 12 at start of game, wins to 0
+var guessesRemaining = 12; 
+var wins=0;
 
-	document.onkeyup = function(event) {
-		//Runs when the gamer selects a valid key that has already been guessed; nothing happens	
-		var lowKey = event.key.toLowerCase(); 
-		if (alphabet.includes(lowKey) && lettersAlreadyGuessed.includes(lowKey)){
-			console.log("already been guessed");
-		}
+// Example of wordArray is ["e", "y", "e", "b", "a", "l", "l", "s"]
+var wordArray = chosenRandomWord.toLowerCase().split("");
 
-		//Runs if the gamer selects a valid key which is in the word that has not been guessed
-		else if (alphabet.includes(lowKey) && wordArray.includes(lowKey) && lettersAlreadyGuessed.indexOf(event.key) === -1){
-			// lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
-			// //displays a list like A, B, C of guessed letters not in the word
-			// letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
-
-			for (i=0; i<chosenRandomWord.length;i++){
-				if (chosenRandomWord[i].toLowerCase() === lowKey){
-					wordBlankArray[i] = event.key.toUpperCase();
-					getWordSpace.textContent = wordBlankArray.join("");
-				};
-			}
-		//Ends the else if	
-		}
-		//Runs if the gamer selects a valid key which is not in the word 
-		else if (alphabet.includes(lowKey) && guessesRemaining > 0) {
-			--guessesRemaining; 
-			guessesSpace.textContent = guessesRemaining;	
-			lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
-			//displays a list like A, B, C of guessed letters not in the word
-			letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");}
-					//Runs if the gamer selects a valid key and the game is over
-		if (guessesRemaining === 0){
-		// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
-		outputArray= chooseRandomWord(wordBank);
-		chosenRandomWord= outputArray[0];
-		wordBlankArray= outputArray[2].split("");
-		lettersAlreadyGuessed = [];
-		letterGuessedList.textContent = "";
-		guessesRemaining = 12; 
-		guessesSpace.textcontent = guessesRemaining;
-		wordArray = chosenRandomWord.toLowerCase().split("");
-	};
-
-
-
-
-	//Ends the document onkey up function of game	
+document.onkeyup = function(event) {
+	//Runs when the gamer selects a valid key that has already been guessed; nothing happens	
+	var lowKey = event.key.toLowerCase(); 
+	if (alphabet.includes(lowKey) && lettersAlreadyGuessed.includes(lowKey)){
+		console.log("already been guessed");
 	}
-//Ends game function	
-// };
 
-	// Reference
-	//var res = str1.concat(str2);
+	//Runs if the gamer selects a valid key which is in the word that has not been guessed
+	else if (alphabet.includes(lowKey) && wordArray.includes(lowKey) && lettersAlreadyGuessed.indexOf(event.key) === -1){
 
-//function setup(){
-//	chooseRandomWord(wordBank);
-//Testing purposes	
-//	console.log(chooseRandomWord(wordBank));
-//}
+		for (i=0; i<chosenRandomWord.length;i++){
+			if (chosenRandomWord[i].toLowerCase() === lowKey){
+				wordBlankArray[i] = event.key.toUpperCase();
+				getWordSpace.textContent = wordBlankArray.join("");
+			};
+		}
 
+		if (wordBlankArray.indexOf("_") === -1){
+			++wins;
+			getWins.textContent = wins;
+			outputArray= chooseRandomWord(wordBank);
+			chosenRandomWord= outputArray[0];
+			wordBlankArray= outputArray[2].split("");
+			lettersAlreadyGuessed = [];
+			letterGuessedList.textContent = "";
+			guessesRemaining = 12; 
+			guessesSpace.textContent = guessesRemaining;
+			wordArray = chosenRandomWord.toLowerCase().split("");
+		}
+	//Ends the else if level
+	}
 
-// Calls to action
-// window.addEventListener('load', function() {
-//   // Call the setup function
-//   var chosenRandomWord = setup();
-// });
-// var chosenRandomWord= chooseRandomWord(wordBank)[0];
-// game(chosenRandomWord);
+	//Runs if the gamer selects a valid key which is not in the word 
+	else if (alphabet.includes(lowKey) && guessesRemaining > 0) {
+		--guessesRemaining; 
+		guessesSpace.textContent = guessesRemaining;	
+		lettersAlreadyGuessed[lettersAlreadyGuessed.length]=event.key; 
+		//displays a list like A, B, C of guessed letters not in the word
+		letterGuessedList.textContent = lettersAlreadyGuessed.join(", ");
+
+		if (guessesRemaining === 0){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			outputArray= chooseRandomWord(wordBank);
+			chosenRandomWord= outputArray[0];
+			wordBlankArray= outputArray[2].split("");
+			lettersAlreadyGuessed = [];
+			letterGuessedList.textContent = "";
+			guessesRemaining = 12; 
+			guessesSpace.textContent = guessesRemaining;	
+			wordArray = chosenRandomWord.toLowerCase().split("");
+		}
+	}
+//Ends the document onkey up function of game	
+};
+
