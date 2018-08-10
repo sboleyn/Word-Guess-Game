@@ -203,7 +203,19 @@ function chooseRandomWord(wBank){
 	var dhwNoEndSpace = displayHiddenWord.substr(0,displayHiddenWord.length-1);
 	getWordSpace.textContent = dhwNoEndSpace;
 	return [randomWord, rando, dhwNoEndSpace];
-	}
+	};
+
+//This function starts a new game	
+function newGame(){
+	outputArray= chooseRandomWord(wordBank);
+	chosenRandomWord= outputArray[0];
+	wordBlankArray= outputArray[2].split("");
+	lettersAlreadyGuessed = [];
+	letterGuessedList.textContent = "";
+	guessesRemaining = 12; 
+	guessesSpace.textContent = guessesRemaining;	
+	wordArray = chosenRandomWord.toLowerCase().split("");
+};	
 
 // Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
 var outputArray= chooseRandomWord(wordBank);
@@ -242,14 +254,7 @@ document.onkeyup = function(event) {
 		if (wordBlankArray.indexOf("_") === -1){
 			++wins;
 			getWins.textContent = wins;
-			outputArray= chooseRandomWord(wordBank);
-			chosenRandomWord= outputArray[0];
-			wordBlankArray= outputArray[2].split("");
-			lettersAlreadyGuessed = [];
-			letterGuessedList.textContent = "";
-			guessesRemaining = 12; 
-			guessesSpace.textContent = guessesRemaining;
-			wordArray = chosenRandomWord.toLowerCase().split("");
+			newGame();
 		}
 	//Ends the else if level
 	}
@@ -264,14 +269,7 @@ document.onkeyup = function(event) {
 
 		if (guessesRemaining === 0){
 			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
-			outputArray= chooseRandomWord(wordBank);
-			chosenRandomWord= outputArray[0];
-			wordBlankArray= outputArray[2].split("");
-			lettersAlreadyGuessed = [];
-			letterGuessedList.textContent = "";
-			guessesRemaining = 12; 
-			guessesSpace.textContent = guessesRemaining;	
-			wordArray = chosenRandomWord.toLowerCase().split("");
+			newGame();
 		}
 	}
 //Ends the document onkey up function of game	
