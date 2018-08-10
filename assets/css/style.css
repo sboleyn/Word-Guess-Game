@@ -1,0 +1,9 @@
+body{
+    height: 100vh;
+    background-image: url(../images/zombie.jpg);
+    background-size: cover;
+}
+
+#currentWord{
+    letter-spacing: 3px;
+}
