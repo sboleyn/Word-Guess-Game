@@ -191,6 +191,7 @@ var letterGuessedList = document.getElementById("lettersGuessed");
 var guessesSpace = document.getElementById("guessesRemaining");
 var getWordSpace = document.getElementById("currentWord");
 var getWins = document.getElementById("displayWins");
+var getImage = document.getElementById("zombiePic");
 
 // This function should choose a random word at the beginning of the game and that word should be displayed ex._____ on the page.
 
@@ -215,6 +216,7 @@ function newGame(){
 	guessesRemaining = 12; 
 	guessesSpace.textContent = guessesRemaining;	
 	wordArray = chosenRandomWord.toLowerCase().split("");
+	getImage.src="assets/images/0_zombie_sm.png";
 };	
 
 // Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
@@ -271,6 +273,61 @@ document.onkeyup = function(event) {
 			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
 			newGame();
 		}
+
+		if (guessesRemaining === 1){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/11_zombie_sm.png";
+		}
+		
+		if (guessesRemaining === 2){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/10_zombie_sm.png";
+		}
+		
+		if (guessesRemaining === 3){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/9_zombie_sm.png";
+		}
+		
+		if (guessesRemaining === 4){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/8_zombie_sm.png";
+		}
+		
+		if (guessesRemaining === 5){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/7_zombie_sm.png";
+		}		
+
+		if (guessesRemaining === 6){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/6_zombie_sm.png";
+		}	
+		
+		if (guessesRemaining === 7){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/5_zombie_sm.png";
+		}	
+		
+		if (guessesRemaining === 8){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/4_zombie_sm.png";
+		}			
+		if (guessesRemaining === 9){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/3_zombie_sm.png";
+		}	
+
+		if (guessesRemaining === 10){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/2_zombie_sm.png";
+		}	
+		
+		if (guessesRemaining === 11){
+			// Create a global variable for randomWord(the word picked from the bank as a string), rando(the index from the word bank that belongs to the random word), and dhwNoEndSpace (a string that looks like "_ _ _ _ _ _" that is the length of the random word)
+			getImage.src="assets/images/1_zombie_sm.png";
+		}				
+
 	}
 //Ends the document onkey up function of game	
 };
