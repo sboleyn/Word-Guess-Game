@@ -1,7 +1,14 @@
 body{
-    height: 100vh;
+    min-height: 100vh;
     background-image: url(../images/zombie.jpg);
     background-size: cover;
+    color: #131508;
+}
+
+.container{
+    background-image: radial-gradient(circle, rgba(116,160,21,0.9), rgba(106,121,8,0.2), rgba(87,86,7,0.3), rgba(63,54,8,0.8), rgba(36,26,0,.9));
+    font-weight: bold;
+    padding:20px;
 }
 
 #currentWord{
@@ -13,24 +20,43 @@ font-family: 'MedievalSharp', cursive;
 font-family: 'Hanalei Fill', cursive; */
 
 h4{
-    font-family: 'Michroma', sans-serif;
+    font-family: 'Butcherman', cursive;
+    font-size: 2em;
 }
 
-h5{
+/* h5{
 
 }
 
 h6{
 
+} */
+
+#halloTxt{
+    font-family: 'Kirang Haerang', cursive;
+    font-size: 95px;
 }
 
-#textDiv{
-    top: 50%; 
-    left:50%;
-    transform: translate(-50%, -50%);
-    box-sizing: content-box;
+#hangTxt{
+    margin-top: -30px;
+    font-family: 'Kirang Haerang', cursive;
+    font-size: 65px;
 }
 
-::before,
-*::after {
-  box-sizing: content-box;}
+#zombieTxt{
+    font-family: 'Hanalei Fill', cursive;
+    font-size: 45px;
+}
+
+img{
+    width: 250px;
+}
+
+@media {}@media screen and (max-width: 640px) {
+  
+    .container{
+        background-image: radial-gradient(circle, rgba(116,160,21,0.9), rgba(106,121,8,0.9), rgba(87,86,7,0.3), rgba(63,54,8,0.2), rgba(36,26,0,0.1));
+    }
+
+}
+
